@@ -237,6 +237,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -6631762780898256490, guid: d1d6ffecec208454bbbf0e1aa533d7ab,
+        type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 8db3d6f64fa936c4aaac2c928722685f, type: 3}
+    - target: {fileID: -6631762780898256490, guid: d1d6ffecec208454bbbf0e1aa533d7ab,
+        type: 3}
+      propertyPath: m_Pitch
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: -6631762780898256490, guid: d1d6ffecec208454bbbf0e1aa533d7ab,
+        type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 610392115029203944, guid: d1d6ffecec208454bbbf0e1aa533d7ab,
         type: 3}
       propertyPath: m_Name
@@ -302,7 +317,8 @@ PrefabInstance:
       propertyPath: m_Mass
       value: 0.1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6516289298495115656, guid: d1d6ffecec208454bbbf0e1aa533d7ab, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: d1d6ffecec208454bbbf0e1aa533d7ab, type: 3}
 --- !u!108 &705507994 stripped
 Light:
