@@ -5,6 +5,8 @@ using UnityEngine;
 public class rocket : MonoBehaviour
 {
 
+    [SerializeField] float rcsThrust = 150f;
+    [SerializeField] float mainThrust = 20f;
     Rigidbody rigidBody;
     AudioSource audioSource; 
     // Start is called before the first frame update
@@ -24,16 +26,18 @@ public class rocket : MonoBehaviour
 
     private void Rotate(){
 
+        float rotationSpeed = Time.deltaTime * rcsThrust;
+
         // taking care of the rotation
         rigidBody.freezeRotation = true;
 
         if (Input.GetKey(KeyCode.A)){
             
-            transform.Rotate(Vector3.forward);
+            transform.Rotate(Vector3.forward * rotationSpeed);
         }
         else if (Input.GetKey(KeyCode.D)){
             
-            transform.Rotate(-Vector3.forward);
+            transform.Rotate(-Vector3.forward * rotationSpeed);
 
         }
 
@@ -42,10 +46,12 @@ public class rocket : MonoBehaviour
 
     private void Thrust(){
 
+        float thrustSpeed = Time.deltaTime * rcsThrust;
+
         if (Input.GetKey(KeyCode.Space)){
 
             //si no fuera relative, no giraria en up local sino global
-            rigidBody.AddRelativeForce(Vector3.up);
+            rigidBody.AddRelativeForce(Vector3.up * thrustSpeed);
 
             if (!audioSource.isPlaying)
                 audioSource.Play();
