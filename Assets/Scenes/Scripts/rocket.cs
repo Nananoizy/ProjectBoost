@@ -8,6 +8,9 @@ public class rocket : MonoBehaviour
 
     [SerializeField] float rcsThrust = 150f;
     [SerializeField] float mainThrust = 20f;
+    [SerializeField] AudioClip mainEngine;
+    [SerializeField] AudioClip deathSound;
+    [SerializeField] AudioClip winSound;
     Rigidbody rigidBody;
     AudioSource audioSource;
 
@@ -26,8 +29,8 @@ public class rocket : MonoBehaviour
 
         if (state == State.Alive){
 
-            Thrust();
-            Rotate();
+            RespondToThrustInput();
+            RespondToRotateInput();
 
         }
         
@@ -36,6 +39,12 @@ public class rocket : MonoBehaviour
 
     void OnCollisionEnter(Collision collision){
 
+        if (state != State.Alive){
+
+            return; //ignore collisions when dead
+
+        }
+
         switch(collision.gameObject.tag){
 
             case "Friendly":
@@ -43,11 +52,15 @@ public class rocket : MonoBehaviour
             break;
 
             case "Finish":
+                audioSource.Stop();
+                audioSource.PlayOneShot(winSound);
                 state = State.Transcending;
                 Invoke("LoadNextScene", 1f);
             break;
 
             default:
+                audioSource.Stop();
+                audioSource.PlayOneShot(deathSound);
                 state = State.Dying;
                 Invoke("LoadFirstLevel", 1f);
             break;
@@ -55,7 +68,7 @@ public class rocket : MonoBehaviour
 
     }
 
-    private void Rotate(){
+    private void RespondToRotateInput(){
 
         float rotationSpeed = Time.deltaTime * rcsThrust;
 
@@ -75,21 +88,25 @@ public class rocket : MonoBehaviour
         rigidBody.freezeRotation = false;
     }
 
-    private void Thrust(){
-
-        float thrustSpeed = Time.deltaTime * rcsThrust;
+    private void RespondToThrustInput(){
 
         if (Input.GetKey(KeyCode.Space)){
-
-            //si no fuera relative, no giraria en up local sino global
-            rigidBody.AddRelativeForce(Vector3.up * thrustSpeed);
-
-            if (!audioSource.isPlaying)
-                audioSource.Play();
+            ApplyThrust();
         }
         else
             audioSource.Stop();
 
+    }
+
+    private void ApplyThrust(){
+
+        float thrustSpeed = Time.deltaTime * rcsThrust;
+
+        //si no fuera relative, no giraria en up local sino global
+            rigidBody.AddRelativeForce(Vector3.up * thrustSpeed);
+
+            if (!audioSource.isPlaying)
+                audioSource.PlayOneShot(mainEngine);
     }
 
     private void LoadNextScene(){
