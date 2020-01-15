@@ -99,9 +99,10 @@ public class rocket : MonoBehaviour
         if (Input.GetKey(KeyCode.Space)){
             ApplyThrust();
         }
-        else
+        else{
             audioSource.Stop();
             boostParticles.Stop();
+        } 
 
     }
 
@@ -112,10 +113,11 @@ public class rocket : MonoBehaviour
         //si no fuera relative, no giraria en up local sino global
             rigidBody.AddRelativeForce(Vector3.up * thrustSpeed);
 
-            if (!audioSource.isPlaying)
+            if (!audioSource.isPlaying){
                 audioSource.PlayOneShot(mainEngine);
+                boostParticles.Play();
+            }
 
-            boostParticles.Play();
     }
 
     private void LoadNextScene(){
