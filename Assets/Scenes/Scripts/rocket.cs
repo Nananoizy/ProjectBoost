@@ -11,6 +11,7 @@ public class rocket : MonoBehaviour
     [SerializeField] AudioClip mainEngine;
     [SerializeField] AudioClip deathSound;
     [SerializeField] AudioClip winSound;
+    [SerializeField] float loadLevelTime = 2f;
 
     //Particles
     [SerializeField] ParticleSystem boostParticles;
@@ -60,7 +61,7 @@ public class rocket : MonoBehaviour
                 audioSource.PlayOneShot(winSound);
                 winParticles.Play();
                 state = State.Transcending;
-                Invoke("LoadNextScene", 1f);
+                Invoke("LoadNextScene", loadLevelTime);
             break;
 
             default:
@@ -68,7 +69,7 @@ public class rocket : MonoBehaviour
                 audioSource.PlayOneShot(deathSound);
                 deathParticles.Play();
                 state = State.Dying;
-                Invoke("LoadFirstLevel", 1f);
+                Invoke("LoadFirstLevel", loadLevelTime);
             break;
         }
 
