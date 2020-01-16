@@ -6,9 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Scenes/Level 1.unity
+    path: Assets/Scenes/Scenes/Basic.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
   - enabled: 1
-    path: Assets/Scenes/Scenes/Level 2.unity
+    path: Assets/Scenes/Scenes/Cliff.unity
     guid: 502437d49e06cd649b7df6ace4e0f920
+  - enabled: 1
+    path: Assets/Scenes/Scenes/Chomper.unity
+    guid: b9f6a46fb615bd14a982664084ae9e48
   m_configObjects: {}
